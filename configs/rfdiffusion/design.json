@@ -1,0 +1,13 @@
+{
+  "task": "binder_design",
+  "num_seqs": 8,
+  "hotspot_res": [
+    130,
+    160
+  ],
+  "contigmap": "A1-290",
+  "contigs": [
+    "A1-290"
+  ],
+  "design_name": "petase_binder_seed0"
+}

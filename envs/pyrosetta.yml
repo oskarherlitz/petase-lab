@@ -1,0 +1,9 @@
+name: petase-pyrosetta
+channels: [conda-forge, defaults]
+dependencies:
+  - python=3.11
+  - pip
+  - numpy
+  - pandas
+  - pip:
+      - pyrosetta  # install your licensed wheel manually if needed

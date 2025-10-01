@@ -1,0 +1,6 @@
+*.pdb filter=lfs diff=lfs merge=lfs
+*.cif filter=lfs diff=lfs merge=lfs
+*.pse filter=lfs diff=lfs merge=lfs
+*.pt  filter=lfs diff=lfs merge=lfs
+*.ckpt filter=lfs diff=lfs merge=lfs
+*.mp4 filter=lfs diff=lfs merge=lfs

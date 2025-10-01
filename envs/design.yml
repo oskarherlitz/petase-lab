@@ -1,0 +1,11 @@
+name: petase-design
+channels: [conda-forge, defaults]
+dependencies:
+  - python=3.11
+  - pandas
+  - numpy
+  - biopython
+  - rdkit
+  - pip
+  - pip:
+      - mdutils

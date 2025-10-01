@@ -1,0 +1,14 @@
+<ROSETTASCRIPTS>
+  <SCOREFXNS>
+    <ScoreFunction name="fa" weights="ref2015_cart"/>
+  </SCOREFXNS>
+  <MOVERS>
+    <AddOrRemoveMatchCsts name="cst" cst_file="configs/rosetta/catalytic.cst" add_csts="1"/>
+    <FastDesign name="fd" scorefxn="fa" repeats="4"/>
+  </MOVERS>
+  <PROTOCOLS>
+    <Add mover="cst"/>
+    <Add mover="fd"/>
+  </PROTOCOLS>
+  <OUTPUT scorefxn="fa"/>
+</ROSETTASCRIPTS>

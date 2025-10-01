@@ -1,0 +1,8 @@
+params_path: /abs/path/to/alphafold/params
+databases:
+  uniref90: /abs/path/to/uniref90
+  mgnify: /abs/path/to/mgnify
+  pdb70: /abs/path/to/pdb70
+  uniprot: /abs/path/to/uniprot
+  pdb_mmcif: /abs/path/to/pdb_mmcif
+notes: "Do not commit actual params/db. This file only stores local paths."

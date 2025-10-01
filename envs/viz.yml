@@ -1,0 +1,7 @@
+name: petase-viz
+channels: [conda-forge, defaults]
+dependencies:
+  - python=3.11
+  - pymol-open-source
+  - matplotlib
+  - imageio
