@@ -20,17 +20,3 @@ Reproducible, multi-tool pipeline for PETase optimization (Rosetta, FoldX, Alpha
 - `docs/`       — methodology, glossary, decision records, progress reports.
 - `tests/`      — sanity tests for parsers/utilities.
 
-## Initialize Git + LFS
-```bash
-git init -b main
-git lfs install
-git add .
-git commit -m "chore: scaffold petase-lab"
-```
-
-## Push to GitHub (optional, using GitHub CLI)
-```bash
-gh repo create petase-lab --public --source=. --remote=origin --push
-```
-# petase-lab
-# petase-lab
