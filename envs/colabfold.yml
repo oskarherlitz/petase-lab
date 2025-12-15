@@ -1,0 +1,29 @@
+name: petase-colabfold
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pandas
+  - numpy
+  - biopython
+  # ColabFold installation (choose one):
+  # Option 1: Via conda (if available)
+  # - colabfold
+  # Option 2: Via pip (recommended)
+  - pip:
+      - colabfold
+      # OR for local batch processing:
+      # - colabfold[alphafold]  # Includes AlphaFold dependencies
+notes: |
+  To install ColabFold:
+  1. Create environment: conda env create -f envs/colabfold.yml
+  2. Activate: conda activate petase-colabfold
+  3. Install ColabFold: pip install colabfold
+  4. For local batch: pip install "colabfold[alphafold]"
+  
+  Note: Local installation requires ~10GB for databases.
+  Web interface (https://colabfold.com) is easier for most users.
+

@@ -1,0 +1,57 @@
+# Mutation list for PETase optimization
+# Format: total N (number of mutation sets)
+# Then for each mutation set:
+# <number-of-mutations-in-this-set>
+# <single-letter-wt-aa> <residue-number> <chain-id> <single-letter-mutant-aa>
+#
+# Rosetta cartesian_ddg mut_file format (works with your build):
+# - Format accepted here: <wt-aa> <residue-number> <chain-id> <mutant-aa>
+#   The ddG binary itself often only uses <wt-aa> <residue-number> <mutant-aa>;
+#   `scripts/rosetta_ddg.sh` will automatically strip the chain column when generating
+#   the cleaned mut_file passed to Rosetta.
+# - Rosetta asserts the WT matches the structure at that position.
+# - For single mutations, each set has "1" followed by the mutation
+# - IMPORTANT: Use Rosetta POSE numbering (1..N) for the residue-number.
+#              For PETase_raw_0008.pdb, PDB numbering starts at 30, so:
+#                pose_index = pdb_resnum - 29
+#              Example: PDB 160 (SER) corresponds to pose 131 → "S 131 A A"
+#
+# IMPORTANT: The number before each mutation is the COUNT of mutations in that set,
+# NOT a mutation ID. For single mutations, always use "1".
+#
+total 8
+
+# Active site mutations (conservative)
+# Set 1: Single mutation (PDB 160 → pose 131: S → A)
+1
+S 131 A A
+
+# Set 2: Single mutation (PDB 206 → pose 177: D → N)
+1
+D 177 A N
+
+# Set 3: Single mutation (PDB 237 → pose 208: H → N)
+1
+H 208 A N
+
+# Substrate binding pocket
+# Set 4: Single mutation (PDB 150 → pose 121: D → G)
+1
+D 121 A G
+
+# Set 5: Single mutation (PDB 180 → pose 151: A → F)
+1
+A 151 A F
+
+# Set 6: Single mutation (PDB 224 → pose 195: R → F)
+1
+R 195 A F
+
+# Stability mutations
+# Set 7: Single mutation (PDB 238 → pose 209: S → L)
+1
+S 209 A L
+
+# Set 8: Single mutation (PDB 185 → pose 156: W → V)
+1
+W 156 A V

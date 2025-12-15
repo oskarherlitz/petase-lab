@@ -5,6 +5,9 @@ __pycache__/
 .venv/
 .DS_Store
 
+# Local installers / large binaries (do not commit)
+*.whl
+
 # Big outputs and caches (keep summaries only)
 runs/*/outputs/
 results/*/gallery/*.mp4

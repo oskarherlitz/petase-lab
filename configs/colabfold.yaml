@@ -1,0 +1,33 @@
+# ColabFold Configuration
+# ColabFold can run locally or via web interface
+
+# Local installation (if using colabfold_batch)
+# Path to colabfold_batch executable (if installed locally)
+colabfold_batch_path: colabfold_batch  # or full path if not in PATH
+
+# Web interface (easier option)
+# Use: https://colabfold.com or https://github.com/sokrypton/ColabFold
+web_interface: https://colabfold.com
+
+# Prediction settings
+num_recycles: 3          # Number of refinement cycles (1-3, higher = better but slower)
+num_models: 5            # Number of models to generate (1-5)
+use_amber: true          # Use AMBER relaxation (slower but more accurate)
+use_templates: true      # Use PDB templates if available
+
+# Output settings
+output_dir: runs/colabfold_predictions
+save_to_csv: true       # Save results summary to CSV
+
+notes: |
+  ColabFold Options:
+  1. Web interface (easiest): https://colabfold.com
+     - Upload FASTA file
+     - Get results in browser
+     - Download PDB files
+  
+  2. Local installation (advanced):
+     - Install: conda install -c conda-forge colabfold
+     - Or: pip install colabfold
+     - Requires: ~10GB disk space for databases
+

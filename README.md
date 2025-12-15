@@ -2,9 +2,19 @@
 Reproducible, multi-tool pipeline for PETase optimization (Rosetta, FoldX, AlphaFold/ColabFold, RFdiffusion, PyMOL).
 
 ## Quickstart
-1. Create a new Git repo here and enable Git LFS (see below).
-2. Put your PETase PDB in `data/raw/` and ligand SDF in `data/raw/ligands/`.
-3. Run Rosetta relax via `scripts/rosetta_relax.sh data/raw/PETase_raw.pdb` (after setting `ROSETTA_BIN`).
+
+### For New Users
+1. **Setup initial data**: `bash scripts/setup_initial_data.sh`
+2. **Set Rosetta path**: `export ROSETTA_BIN=/path/to/rosetta/main/source/bin`
+3. **Run first relaxation**: `bash scripts/rosetta_relax.sh data/raw/PETase_raw.pdb`
+
+### Documentation
+- **[Setup Guide](docs/SETUP_GUIDE.md)**  **START HERE** - Environment setup and where to run code
+- **[Quick Start Guide](docs/QUICKSTART.md)** - Step-by-step instructions to begin
+- **[ColabFold Guide](docs/COLABFOLD_GUIDE.md)** - Structure prediction with ColabFold
+- **[Research Plan](docs/RESEARCH_PLAN.md)** - Comprehensive methodology and timeline
+- **[Progress Reports](docs/reports/)** - Current status and findings
+- **[Methodology](docs/methodology.md)** - Workflow overview
 
 ## Repo layout
 - `envs/`       — small env YAMLs (conda/uv) to avoid dependency clashes.
