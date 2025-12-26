@@ -1,0 +1,33 @@
+# Phase-2 mutation list (auto-generated)
+# Input: analysis/ddg/phase1.csv
+# Included tiers: A,B
+# Excluded pose positions: 131,177,208
+# Note: excluded defaults correspond to catalytic triad in this repo (pose 131/177/208).
+# Skipped (excluded) best hits: S131A
+# Format: total N; then for each set: '1' + '<WT> <POSE> <CHAIN> <MUT>'
+total 8
+
+1
+R 195 A F
+
+1
+R 195 A Q
+
+1
+R 195 A E
+
+1
+R 195 A I
+
+1
+S 209 A L
+
+1
+S 209 A F
+
+1
+S 209 A I
+
+1
+S 209 A V
+
