@@ -38,12 +38,12 @@ def main():
         sys.exit(1)
     
     # Read and parse CSV
-rows = []
+    rows = []
     invalid_rows = 0
     
     try:
         with open(csv_file, 'r') as f:
-    reader = csv.DictReader(f)
+            reader = csv.DictReader(f)
             
             # Validate required columns
             required_cols = ['run', 'mutation', 'ddg_reu']
@@ -69,7 +69,7 @@ rows = []
                     
                     ddg_value = float(ddg_str)
                     row['ddg_reu'] = ddg_value
-            rows.append(row)
+                    rows.append(row)
                     
                 except ValueError as e:
                     print(f"Warning: Row {row_num}: Invalid ddg_reu value '{row.get('ddg_reu', '')}': {e}, skipping", file=sys.stderr)
@@ -78,7 +78,7 @@ rows = []
                 except KeyError as e:
                     print(f"Warning: Row {row_num}: Missing required column: {e}, skipping", file=sys.stderr)
                     invalid_rows += 1
-            continue
+                    continue
 
     except IOError as e:
         print(f"Error: Cannot read CSV file {csv_file}: {e}", file=sys.stderr)
@@ -99,8 +99,8 @@ rows = []
         print("  3. Verify CSV format: run,mutation,ddg_reu", file=sys.stderr)
         sys.exit(1)
     
-# Sort by ddg_reu (ascending - most negative = most stabilizing)
-rows.sort(key=lambda x: x['ddg_reu'])
+    # Sort by ddg_reu (ascending - most negative = most stabilizing)
+    rows.sort(key=lambda x: x['ddg_reu'])
 
     # Print results
     print(f"Found {len(rows)} valid mutation(s), showing top {min(k, len(rows))}:", file=sys.stderr)

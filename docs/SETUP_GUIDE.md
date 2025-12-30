@@ -144,7 +144,7 @@ export ROSETTA_BIN=/path/to/rosetta/main/source/bin
 bash scripts/setup_initial_data.sh
 
 # 4. Run first Rosetta calculation
-bash scripts/rosetta_relax.sh data/raw/PETase_raw.pdb
+bash scripts/rosetta_relax.sh data/structures/5XJH/raw/PETase_raw.pdb
 ```
 
 ---
@@ -196,7 +196,7 @@ conda activate petase-lab
 export ROSETTA_BIN=/path/to/rosetta/main/source/bin
 
 # 5. Run your commands
-bash scripts/rosetta_relax.sh data/raw/PETase_raw.pdb
+bash scripts/rosetta_relax.sh data/structures/5XJH/raw/PETase_raw.pdb
 ```
 
 ---

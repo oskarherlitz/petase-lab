@@ -78,7 +78,7 @@ bash scripts/setup_initial_data.sh
 ```
 
 ### What happens:
-1. **Copies** `data/Pymol&FoldX_data/5XJH_Repair.pdb` → `data/raw/PETase_raw.pdb`
+1. **Copies** `data/structures/5XJH/foldx/5XJH_Repair.pdb` → `data/structures/5XJH/raw/PETase_raw.pdb`
 2. **Creates** directories for results (`results/`, `runs/`)
 3. **Verifies** the structure has key catalytic residues
 
@@ -99,7 +99,7 @@ bash scripts/setup_initial_data.sh
 
 ### What it does:
 ```bash
-bash scripts/rosetta_relax.sh data/raw/PETase_raw.pdb
+bash scripts/rosetta_relax.sh data/structures/5XJH/raw/PETase_raw.pdb
 ```
 
 ### What happens:

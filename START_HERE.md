@@ -64,7 +64,7 @@ bash scripts/setup_initial_data.sh
 - Creates directories for results
 - Verifies the structure has key residues
 
-**Why?** Your scripts expect input in `data/raw/PETase_raw.pdb`. This script sets that up.
+**Why?** Your scripts expect input in `data/structures/5XJH/raw/PETase_raw.pdb`. This script sets that up.
 
 ---
 
@@ -73,7 +73,7 @@ bash scripts/setup_initial_data.sh
 ### Run this:
 ```bash
 conda activate petase-lab
-bash scripts/rosetta_relax.sh data/raw/PETase_raw.pdb
+bash scripts/rosetta_relax.sh data/structures/5XJH/raw/PETase_raw.pdb
 ```
 
 ### What happens:

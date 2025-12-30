@@ -7,7 +7,7 @@ set -euo pipefail
 : "${ROSETTA_BIN:?Set ROSETTA_BIN to Rosetta bin dir}"
 
 # Validate and set input PDB
-IN=${1:-data/raw/PETase_raw.pdb}
+IN=${1:-data/structures/5XJH/raw/PETase_raw.pdb}
 
 # Validate input file exists
 if [ ! -f "$IN" ]; then

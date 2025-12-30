@@ -6,7 +6,7 @@ Reproducible, multi-tool pipeline for PETase optimization (Rosetta, FoldX, Alpha
 ### For New Users
 1. **Setup initial data**: `bash scripts/setup_initial_data.sh`
 2. **Set Rosetta path**: `export ROSETTA_BIN=/path/to/rosetta/main/source/bin`
-3. **Run first relaxation**: `bash scripts/rosetta_relax.sh data/raw/PETase_raw.pdb`
+3. **Run first relaxation**: `bash scripts/rosetta_relax.sh data/structures/5XJH/raw/PETase_raw.pdb`
 
 ### Documentation
 - **[Setup Guide](docs/SETUP_GUIDE.md)**  **START HERE** - Environment setup and where to run code
@@ -15,6 +15,7 @@ Reproducible, multi-tool pipeline for PETase optimization (Rosetta, FoldX, Alpha
 - **[Research Plan](docs/RESEARCH_PLAN.md)** - Comprehensive methodology and timeline
 - **[Progress Reports](docs/reports/)** - Current status and findings
 - **[Methodology](docs/methodology.md)** - Workflow overview
+- **[Pipeline plan](docs/NEXT_STEPS_CURSOR.md)** - next steps and associated prompts
 
 ## Repo layout
 - `envs/`       — small env YAMLs (conda/uv) to avoid dependency clashes.

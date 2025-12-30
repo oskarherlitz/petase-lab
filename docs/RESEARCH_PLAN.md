@@ -30,7 +30,7 @@
 **Tasks**:
 1. **Copy repaired structure to raw directory**
    ```bash
-   cp data/Pymol&FoldX_data/5XJH_Repair.pdb data/raw/PETase_raw.pdb
+   cp data/structures/5XJH/foldx/5XJH_Repair.pdb data/structures/5XJH/raw/PETase_raw.pdb
    ```
 
 2. **Verify structure quality**
@@ -108,7 +108,7 @@ total 3
 export ROSETTA_BIN=/path/to/rosetta/main/source/bin
 make relax
 # OR
-bash scripts/rosetta_relax.sh data/raw/PETase_raw.pdb
+bash scripts/rosetta_relax.sh data/structures/5XJH/raw/PETase_raw.pdb
 ```
 
 **Expected Output**:
@@ -304,7 +304,7 @@ foldx --command=BuildModel \
 ## Immediate Next Steps (This Week)
 
 ### Day 1-2: Setup
-1. ✅ Copy 5XJH_Repair.pdb to data/raw/PETase_raw.pdb
+1. ✅ Copy 5XJH_Repair.pdb to data/structures/5XJH/raw/PETase_raw.pdb
 2. ✅ Set up Rosetta environment
 3. ✅ Define catalytic constraints based on 5XJH structure
 4. ✅ Create initial mutation list (start with 10-20 positions)

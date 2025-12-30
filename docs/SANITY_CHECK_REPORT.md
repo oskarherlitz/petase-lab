@@ -280,7 +280,7 @@ fi
 **Location:** `scripts/rosetta_relax.sh:4`  
 **Issue:** No check if input PDB exists
 ```bash
-IN=${1:-data/raw/PETase_raw.pdb}
+IN=${1:-data/structures/5XJH/raw/PETase_raw.pdb}
 # ❌ No validation
 ```
 
@@ -288,7 +288,7 @@ IN=${1:-data/raw/PETase_raw.pdb}
 
 **Fix:**
 ```bash
-IN=${1:-data/raw/PETase_raw.pdb}
+IN=${1:-data/structures/5XJH/raw/PETase_raw.pdb}
 if [ ! -f "$IN" ]; then
     echo "Error: Input PDB file not found: $IN" >&2
     exit 1

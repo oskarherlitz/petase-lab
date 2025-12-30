@@ -45,14 +45,14 @@ xattr -dr com.apple.quarantine ~/Desktop/rosetta.binary.m1.release-408
 
 ```bash
 # Check current input file
-head -5 data/raw/PETase_raw.pdb
+head -5 data/structures/5XJH/raw/PETase_raw.pdb
 
 # If it says "REPLACE THIS WITH YOUR REAL PDB", run:
 bash scripts/setup_initial_data.sh
 ```
 
 **What this does:**
-- Copies `data/Pymol&FoldX_data/5XJH_Repair.pdb` → `data/raw/PETase_raw.pdb`
+- Copies `data/structures/5XJH/foldx/5XJH_Repair.pdb` → `data/structures/5XJH/raw/PETase_raw.pdb`
 - Creates necessary directories
 - Verifies structure has key residues
 
@@ -86,7 +86,7 @@ conda activate petase-lab
 export ROSETTA_BIN=~/Desktop/rosetta.binary.m1.release-408/main/source/bin
 
 # Run relaxation
-bash scripts/rosetta_relax.sh data/raw/PETase_raw.pdb
+bash scripts/rosetta_relax.sh data/structures/5XJH/raw/PETase_raw.pdb
 ```
 
 **What happens:**
@@ -238,7 +238,7 @@ conda activate petase-lab
 bash scripts/setup_initial_data.sh
 
 # Run calculations
-bash scripts/rosetta_relax.sh data/raw/PETase_raw.pdb
+bash scripts/rosetta_relax.sh data/structures/5XJH/raw/PETase_raw.pdb
 bash scripts/rosetta_ddg.sh runs/*relax*/outputs/*.pdb configs/rosetta/mutlist.mut
 
 # Analyze

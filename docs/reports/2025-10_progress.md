@@ -15,7 +15,7 @@
 
 ### Next Steps (This Week)
 1. **Data Integration**
-   - Copy repaired structure to `data/raw/PETase_raw.pdb`
+   - Copy repaired structure to `data/structures/5XJH/raw/PETase_raw.pdb`
    - Set up Rosetta environment
    - Define catalytic constraints
 
@@ -34,7 +34,7 @@
 ### FoldX Results
 - Structure repair completed successfully
 - Initial mutation (DA150G) tested
-- Results available in `data/Pymol&FoldX_data/results/`
+- Results available in `data/structures/5XJH/foldx/results/`
 
 ### Structure Quality
 - Crystal structure: 5XJH (1.54 Å resolution)

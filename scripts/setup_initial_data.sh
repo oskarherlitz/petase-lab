@@ -7,8 +7,8 @@ set -euo pipefail
 echo "Setting up initial data for PETase optimization..."
 
 # Check if source file exists
-SOURCE_PDB="data/Pymol&FoldX_data/5XJH_Repair.pdb"
-TARGET_PDB="data/raw/PETase_raw.pdb"
+SOURCE_PDB="data/structures/5XJH/foldx/5XJH_Repair.pdb"
+TARGET_PDB="data/structures/5XJH/raw/PETase_raw.pdb"
 
 if [ ! -f "$SOURCE_PDB" ]; then
     echo "Error: Source file $SOURCE_PDB not found!"
@@ -50,7 +50,7 @@ echo "1. Set ROSETTA_BIN environment variable:"
 echo "   export ROSETTA_BIN=/path/to/rosetta/main/source/bin"
 echo ""
 echo "2. Run Rosetta relaxation:"
-echo "   bash scripts/rosetta_relax.sh data/raw/PETase_raw.pdb"
+echo "   bash scripts/rosetta_relax.sh data/structures/5XJH/raw/PETase_raw.pdb"
 echo ""
 echo "3. Review mutation list:"
 echo "   cat configs/rosetta/mutlist.mut"

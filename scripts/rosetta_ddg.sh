@@ -1,16 +1,68 @@
 #!/usr/bin/env bash
 # Rosetta cartesian_ddg script with validation
-# Usage: bash scripts/rosetta_ddg.sh [model.pdb] [mutlist.mut]
+# Usage:
+#   bash scripts/rosetta_ddg.sh
+#   bash scripts/rosetta_ddg.sh <model.pdb>
+#   bash scripts/rosetta_ddg.sh <model.pdb> <mutlist.mut>
+#
+# Notes (zsh/globs):
+# - cartesian_ddg consumes ONE model PDB. If you pass a glob that expands to many PDBs,
+#   this script will pick the most recently modified PDB among them.
+# - If the last argument ends with .mut, it is treated as the mutation file.
 
 set -euo pipefail
 
 : "${ROSETTA_BIN:?Set ROSETTA_BIN to Rosetta bin dir}"
 
-# Validate and set MODEL parameter
-MODEL=${1:-}
-if [ -z "$MODEL" ]; then
+_usage() {
+    cat >&2 <<'EOF'
+Usage:
+  bash scripts/rosetta_ddg.sh
+  bash scripts/rosetta_ddg.sh <model.pdb>
+  bash scripts/rosetta_ddg.sh <model.pdb> <mutlist.mut>
+  bash scripts/rosetta_ddg.sh <model1.pdb> <model2.pdb> ... <mutlist.mut>
+
+Notes:
+  - If you pass multiple PDBs (e.g. by using a glob), the script picks the most recently
+    modified PDB among them.
+  - If the last argument ends in .mut, it is treated as the mutation file.
+EOF
+}
+
+# Parse arguments robustly:
+# - If last arg is *.mut -> treat as mutation file, everything before is model candidates
+# - Else -> mutation file defaults to configs/rosetta/mutlist.mut and all args are model candidates
+MUT="configs/rosetta/mutlist.mut"
+MODEL=""
+MODEL_CANDIDATES=()
+
+if [ "${#@}" -gt 0 ]; then
+    last_arg="${@: -1}"
+    if [[ "${last_arg}" == *.mut ]]; then
+        MUT="${last_arg}"
+        if [ "${#@}" -gt 1 ]; then
+            # All but last are model candidates
+            MODEL_CANDIDATES=( "${@:1:$#-1}" )
+        fi
+    else
+        MODEL_CANDIDATES=( "$@" )
+    fi
+fi
+
+if [ "${#MODEL_CANDIDATES[@]}" -gt 0 ]; then
+    # Pick most recently modified among provided candidates
+    MODEL="$(ls -t "${MODEL_CANDIDATES[@]}" 2>/dev/null | head -1 || true)"
+    if [ -z "${MODEL}" ]; then
+        echo "Error: Could not select a model PDB from provided arguments." >&2
+        _usage
+        exit 1
+    fi
+    if [ "${#MODEL_CANDIDATES[@]}" -gt 1 ]; then
+        echo "Note: Multiple model PDBs were provided; using most recent: ${MODEL}" >&2
+    fi
+else
     # Find most recent relaxed structure
-    MODEL=$(ls -t runs/*relax*/outputs/*.pdb 2>/dev/null | head -1)
+    MODEL="$(ls -t runs/*relax*/outputs/*.pdb 2>/dev/null | head -1 || true)"
     if [ -z "$MODEL" ]; then
         echo "Error: No relaxed PDB files found. Run relaxation first." >&2
         echo "Expected: runs/*relax*/outputs/*.pdb" >&2
@@ -29,9 +81,6 @@ if [ ! -r "$MODEL" ]; then
     echo "Error: Model file is not readable: $MODEL" >&2
     exit 1
 fi
-
-# Validate and set MUT parameter
-MUT=${2:-configs/rosetta/mutlist.mut}
 
 # Validate mutation file exists
 if [ ! -f "$MUT" ]; then

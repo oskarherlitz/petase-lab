@@ -25,17 +25,17 @@ export ROSETTA_BIN=/path/to/rosetta/main/source/bin
 
 ```bash
 # Copy your repaired structure
-cp data/Pymol&FoldX_data/5XJH_Repair.pdb data/raw/PETase_raw.pdb
+cp data/structures/5XJH/foldx/5XJH_Repair.pdb data/structures/5XJH/raw/PETase_raw.pdb
 
 # Verify the file
-head -20 data/raw/PETase_raw.pdb
+head -20 data/structures/5XJH/raw/PETase_raw.pdb
 ```
 
 ## Step 3: First Rosetta Run (30 minutes - 2 hours)
 
 ```bash
 # Run relaxation
-bash scripts/rosetta_relax.sh data/raw/PETase_raw.pdb
+bash scripts/rosetta_relax.sh data/structures/5XJH/raw/PETase_raw.pdb
 
 # Check results
 ls -lh runs/*relax*/outputs/
