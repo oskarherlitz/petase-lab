@@ -17,3 +17,5 @@ results/*/gallery/*.mp4
 # Misc editor/system
 .idea/
 .vscode/
+external/progen2/models/
+external/progen2/requirements_macos.txt
