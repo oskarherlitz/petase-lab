@@ -1,3 +1,6 @@
 [submodule "external/progen2"]
 	path = external/progen2
 	url = https://github.com/enijkamp/progen2.git
+[submodule "external/rfdiffusion"]
+	path = external/rfdiffusion
+	url = https://github.com/RosettaCommons/RFdiffusion.git

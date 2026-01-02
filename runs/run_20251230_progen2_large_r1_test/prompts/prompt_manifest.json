@@ -1,0 +1,23 @@
+{
+  "baseline_fasta": "/Users/oskarherlitz/Desktop/petase-lab/data/sequences/wt/baseline_5XJH_30-292.fasta",
+  "prompts": {
+    "20": {
+      "prompt_string": "1GSHMRGPNPTAASLEASAGP",
+      "prompt_aa_only": "GSHMRGPNPTAASLEASAGP",
+      "prompt_length_aa": 20,
+      "file": "prompt_20aa.txt"
+    },
+    "50": {
+      "prompt_string": "1GSHMRGPNPTAASLEASAGPFTVRSFTVSRPSGYGAGTVYYPTNAGGTVG",
+      "prompt_aa_only": "GSHMRGPNPTAASLEASAGPFTVRSFTVSRPSGYGAGTVYYPTNAGGTVG",
+      "prompt_length_aa": 50,
+      "file": "prompt_50aa.txt"
+    },
+    "80": {
+      "prompt_string": "1GSHMRGPNPTAASLEASAGPFTVRSFTVSRPSGYGAGTVYYPTNAGGTVGAIAIVPGYTARQSSIKWWGPRLASHGFVVI",
+      "prompt_aa_only": "GSHMRGPNPTAASLEASAGPFTVRSFTVSRPSGYGAGTVYYPTNAGGTVGAIAIVPGYTARQSSIKWWGPRLASHGFVVI",
+      "prompt_length_aa": 80,
+      "file": "prompt_80aa.txt"
+    }
+  }
+}

@@ -34,10 +34,9 @@ if command -v colabfold_batch &> /dev/null; then
     mkdir -p "$OUTPUT_DIR"
     
     colabfold_batch \
-        --num-recycles 3 \
+        --num-recycle 3 \
         --num-models 5 \
-        --use-amber \
-        --use-templates \
+        --amber \
         "$FASTA" \
         "$OUTPUT_DIR"
     
@@ -48,27 +47,37 @@ if command -v colabfold_batch &> /dev/null; then
 elif command -v python &> /dev/null; then
     echo "Local ColabFold not found."
     echo ""
-    echo "Options:"
-    echo "1. Use web interface: https://colabfold.com"
-    echo "   - Upload your FASTA file"
-    echo "   - Download results"
+    echo "═══════════════════════════════════════════════════════════════"
+    echo "  QUICK SETUP OPTIONS"
+    echo "═══════════════════════════════════════════════════════════════"
     echo ""
-    echo "2. Install ColabFold locally:"
-    echo "   conda install -c conda-forge colabfold"
-    echo "   # OR"
-    echo "   pip install colabfold"
+    echo "Option 1: WEB INTERFACE (Easiest - No installation!)"
+    echo "  → Go to: https://colabfold.com"
+    echo "  → Upload your FASTA file: $FASTA"
+    echo "  → Click 'Search' and wait 5-30 minutes"
+    echo "  → Download results"
     echo ""
-    echo "3. Use ColabFold via Google Colab:"
-    echo "   https://github.com/sokrypton/ColabFold"
+    echo "Option 2: INSTALL LOCALLY (For batch processing)"
+    echo "  → Run setup script: bash scripts/setup_colabfold.sh"
+    echo "  → Or install manually: pip install colabfold"
+    echo "  → Then rerun this script"
+    echo ""
+    echo "═══════════════════════════════════════════════════════════════"
     echo ""
     
-    # Create a helper script for web interface
-    echo "Creating FASTA file info for web upload..."
-    echo "File: $FASTA"
-    echo "Sequence:"
-    grep -v "^>" "$FASTA" | head -1
+    # Show FASTA file info for web upload
+    echo "For web interface, your FASTA file is ready:"
+    echo "  File: $FASTA"
+    NUM_SEQS=$(grep -c "^>" "$FASTA" 2>/dev/null || echo "?")
+    echo "  Sequences: $NUM_SEQS"
+    if [ "$NUM_SEQS" -le 5 ]; then
+        echo ""
+        echo "First sequence preview:"
+        grep -v "^>" "$FASTA" | head -1 | cut -c1-80
+        echo "..."
+    fi
     echo ""
-    echo "Upload this file to: https://colabfold.com"
+    echo "Upload to: https://colabfold.com"
     
 else
     echo "Error: Python not found. Cannot run ColabFold."

@@ -1,0 +1,30 @@
+{
+  "gate_C0_token_cleanup": {
+    "count_in": 101,
+    "count_out": 101,
+    "removed": []
+  },
+  "gate_C1_length": {
+    "count_in": 101,
+    "count_out": 100,
+    "removed": [
+      "Length 50 (expected 263)"
+    ]
+  },
+  "gate_C2_hard_locks": {
+    "count_in": 100,
+    "count_out": 0,
+    "removed": [
+      "Pos 177: expected D, got G; Pos 208: expected H, got V",
+      "Pos 131: expected S, got A; Pos 177: expected D, got S; Pos 208: expected H, got S",
+      "Pos 131: expected S, got G; Pos 177: expected D, got A; Pos 208: expected H, got L",
+      "Pos 131: expected S, got T; Pos 177: expected D, got G; Pos 208: expected H, got S",
+      "Pos 131: expected S, got G; Pos 177: expected D, got L; Pos 208: expected H, got L",
+      "Pos 131: expected S, got G; Pos 177: expected D, got N; Pos 208: expected H, got T",
+      "Pos 131: expected S, got G; Pos 177: expected D, got A; Pos 208: expected H, got V",
+      "Pos 131: expected S, got G; Pos 177: expected D, got E; Pos 208: expected H, got G",
+      "Pos 131: expected S, got A; Pos 177: expected D, got A; Pos 208: expected H, got A",
+      "Pos 131: expected S, got T; Pos 177: expected D, got S; Pos 208: expected H, got L"
+    ]
+  }
+}

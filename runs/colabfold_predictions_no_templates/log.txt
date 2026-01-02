@@ -1,0 +1,14 @@
+2026-01-02 13:33:41,400 Running colabfold 1.5.5
+2026-01-02 13:33:41,428 Unable to initialize backend 'cuda': 
+2026-01-02 13:33:41,429 Unable to initialize backend 'rocm': module 'jaxlib.xla_extension' has no attribute 'GpuAllocatorConfig'
+2026-01-02 13:33:41,436 Unable to initialize backend 'tpu': INTERNAL: Failed to open libtpu.so: dlopen(libtpu.so, 0x0001): tried: 'libtpu.so' (no such file), '/System/Volumes/Preboot/Cryptexes/OSlibtpu.so' (no such file), '/Users/oskarherlitz/miniconda3/envs/petase-colabfold/bin/../lib/libtpu.so' (no such file), '/usr/lib/libtpu.so' (no such file, not in dyld cache), 'libtpu.so' (no such file), '/usr/local/lib/libtpu.so' (no such file), '/usr/lib/libtpu.so' (no such file, not in dyld cache)
+2026-01-02 13:33:41,436 WARNING: no GPU detected, will be using CPU
+2026-01-02 13:33:44,476 Found 6 citations for tools or databases
+2026-01-02 13:33:44,476 Query 1/68: candidate_1 (length 263)
+2026-01-02 13:46:54,736 alphafold2_ptm_model_1_seed_000 recycle=0 pLDDT=91.2 pTM=0.898
+2026-01-02 13:59:44,031 alphafold2_ptm_model_1_seed_000 recycle=1 pLDDT=90.9 pTM=0.896 tol=0.734
+2026-01-02 14:12:28,475 alphafold2_ptm_model_1_seed_000 recycle=2 pLDDT=90.9 pTM=0.892 tol=0.534
+2026-01-02 14:25:10,864 alphafold2_ptm_model_1_seed_000 recycle=3 pLDDT=90.9 pTM=0.894 tol=0.261
+2026-01-02 14:25:10,865 alphafold2_ptm_model_1_seed_000 took 3078.6s (3 recycles)
+2026-01-02 14:37:58,072 alphafold2_ptm_model_2_seed_000 recycle=0 pLDDT=91.3 pTM=0.904
+2026-01-02 14:50:47,466 alphafold2_ptm_model_2_seed_000 recycle=1 pLDDT=90.8 pTM=0.901 tol=0.622

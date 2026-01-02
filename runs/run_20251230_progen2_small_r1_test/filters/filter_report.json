@@ -1,0 +1,55 @@
+{
+  "gate_C0_token_cleanup": {
+    "count_in": 304,
+    "count_out": 304,
+    "removed": []
+  },
+  "gate_C1_length": {
+    "count_in": 304,
+    "count_out": 292,
+    "removed": [
+      "Length 50 (expected 263)",
+      "Length 80 (expected 263)",
+      "Length 261 (expected 263)",
+      "Length 232 (expected 263)",
+      "Length 257 (expected 263)",
+      "Length 248 (expected 263)",
+      "Length 50 (expected 263)",
+      "Length 80 (expected 263)",
+      "Length 255 (expected 263)",
+      "Length 232 (expected 263)"
+    ]
+  },
+  "gate_C2_hard_locks": {
+    "count_in": 292,
+    "count_out": 0,
+    "removed": [
+      "Pos 131: expected S, got A; Pos 177: expected D, got A; Pos 208: expected H, got A",
+      "Pos 131: expected S, got G; Pos 177: expected D, got G; Pos 208: expected H, got P",
+      "Pos 131: expected S, got P; Pos 177: expected D, got P; Pos 208: expected H, got P",
+      "Pos 131: expected S, got A; Pos 177: expected D, got A; Pos 208: expected H, got T",
+      "Pos 131: expected S, got P; Pos 177: expected D, got P; Pos 208: expected H, got P",
+      "Pos 131: expected S, got A; Pos 177: expected D, got A; Pos 208: expected H, got A",
+      "Pos 131: expected S, got P; Pos 177: expected D, got T; Pos 208: expected H, got A",
+      "Pos 131: expected S, got A; Pos 177: expected D, got A; Pos 208: expected H, got A",
+      "Pos 131: expected S, got R; Pos 177: expected D, got P; Pos 208: expected H, got A",
+      "Pos 131: expected S, got A; Pos 177: expected D, got G; Pos 208: expected H, got T"
+    ]
+  },
+  "gate_C3_identity_buckets": {
+    "count_in": 0,
+    "count_out": 0,
+    "removed": [],
+    "bucket_assignments": {}
+  },
+  "gate_C4_uniqueness": {
+    "count_in": 0,
+    "count_out": 0,
+    "removed": []
+  },
+  "gate_C5_composition": {
+    "count_in": 0,
+    "count_out": 0,
+    "removed": []
+  }
+}

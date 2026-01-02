@@ -1,0 +1,88 @@
+{
+  "run_id": "run_20251230_progen2_large_r1_test",
+  "created": "2025-12-30T23:25:47.170946",
+  "design_spec": "v1.0",
+  "baseline": {
+    "pdb": "5XJH",
+    "chain": "A",
+    "residues": "30-292",
+    "length": 263,
+    "baseline_fasta": "data/sequences/wt/baseline_5XJH_30-292.fasta"
+  },
+  "reproducibility": {
+    "shis_repo_commit": "401badb0a6f240db0014c83b5ec4e082fc576f24",
+    "progen2_repo_commit": "9b4d4fb5ec19c9e55c4bb06305c0e613e46c1cf5",
+    "progen2_checkpoint": "progen2-large",
+    "python_version": "3.13.7"
+  },
+  "hardware": {
+    "platform": "darwin"
+  },
+  "prompt_set": {
+    "prompt_lengths": [],
+    "prompts": {},
+    "prompt_manifest": null
+  },
+  "generation": {
+    "model": "progen2-large",
+    "sampling_lanes": {},
+    "seeds": [],
+    "settings": {}
+  },
+  "gates": {
+    "C0_token_cleanup": {
+      "count_in": 0,
+      "count_out": 0,
+      "removed": []
+    },
+    "C1_length": {
+      "count_in": 0,
+      "count_out": 0,
+      "removed": []
+    },
+    "C2_hard_locks": {
+      "count_in": 0,
+      "count_out": 0,
+      "removed": []
+    },
+    "C3_identity_buckets": {
+      "count_in": 0,
+      "count_out": 0,
+      "removed": []
+    },
+    "C4_uniqueness": {
+      "count_in": 0,
+      "count_out": 0,
+      "removed": []
+    },
+    "C5_composition": {
+      "count_in": 0,
+      "count_out": 0,
+      "removed": []
+    },
+    "C6_likelihood_ranking": {
+      "count_in": 0,
+      "count_out": 0,
+      "removed": []
+    },
+    "D_af_gate": {
+      "count_in": 0,
+      "count_out": 0,
+      "removed": []
+    },
+    "E_stability_gate": {
+      "count_in": 0,
+      "count_out": 0,
+      "removed": []
+    },
+    "F_docking_gate": {
+      "count_in": 0,
+      "count_out": 0,
+      "removed": []
+    }
+  },
+  "final": {
+    "candidates_selected": 0,
+    "final_rank_file": null
+  }
+}

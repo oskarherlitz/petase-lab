@@ -1,0 +1,50 @@
+{
+  "gate_C0_token_cleanup": {
+    "count_in": 102,
+    "count_out": 102,
+    "removed": []
+  },
+  "gate_C1_length": {
+    "count_in": 102,
+    "count_out": 5,
+    "removed": [
+      "Length 80 (expected 263)",
+      "Length 256 (expected 263)",
+      "Length 254 (expected 263)",
+      "Length 256 (expected 263)",
+      "Length 256 (expected 263)",
+      "Length 257 (expected 263)",
+      "Length 254 (expected 263)",
+      "Length 256 (expected 263)",
+      "Length 255 (expected 263)",
+      "Length 256 (expected 263)"
+    ]
+  },
+  "gate_C2_hard_locks": {
+    "count_in": 5,
+    "count_out": 0,
+    "removed": [
+      "Pos 131: expected S, got G; Pos 177: expected D, got V; Pos 208: expected H, got Q",
+      "Pos 131: expected S, got G; Pos 177: expected D, got T; Pos 208: expected H, got Q",
+      "Pos 131: expected S, got L; Pos 177: expected D, got S; Pos 208: expected H, got P",
+      "Pos 131: expected S, got G; Pos 177: expected D, got V; Pos 208: expected H, got V",
+      "Pos 131: expected S, got G; Pos 177: expected D, got V; Pos 208: expected H, got Q"
+    ]
+  },
+  "gate_C3_identity_buckets": {
+    "count_in": 0,
+    "count_out": 0,
+    "removed": [],
+    "bucket_assignments": {}
+  },
+  "gate_C4_uniqueness": {
+    "count_in": 0,
+    "count_out": 0,
+    "removed": []
+  },
+  "gate_C5_composition": {
+    "count_in": 0,
+    "count_out": 0,
+    "removed": []
+  }
+}
