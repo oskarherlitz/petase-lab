@@ -59,6 +59,20 @@ python3 -c "import jax; print('Devices:', jax.devices())"
 
 ## Step 5: Verify GPU Works
 
+**After installation, verify GPU is detected:**
+
+```bash
+cd /workspace/petase-lab
+bash scripts/verify_gpu_runpod.sh
+```
+
+This script will:
+- Check GPU hardware availability
+- Verify JAX can see the GPU
+- Automatically fix CUDA version mismatches if needed
+
+**Or manually check:**
+
 ```bash
 # Check GPU
 nvidia-smi
@@ -70,7 +84,9 @@ python3 -c "import jax; print('Backend:', jax.default_backend()); print('Devices
 Should show:
 - GPU in nvidia-smi
 - `Backend: gpu` or `cuda`
-- `Devices: [cuda(id=0)]`
+- `Devices: [cuda(id=0)]` or `[GpuDevice(id=0)]`
+
+**If GPU is not detected**, the verification script will automatically reinstall JAX with the correct CUDA version.
 
 ## Step 6: Run ColabFold in tmux
 
