@@ -38,7 +38,7 @@ fi
 echo ""
 echo "3. Installing RFdiffusion dependencies..."
 echo "   (This may take 5-10 minutes)"
-bash scripts/fix_dgl_final.sh
+bash scripts/install_rfdiffusion_deps.sh
 
 # Step 4: Download model weights (if needed)
 echo ""
