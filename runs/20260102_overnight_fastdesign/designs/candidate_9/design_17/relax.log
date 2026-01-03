@@ -39,4 +39,56 @@ basic.io.database: Database file opened: scoring/score_functions/bondlength_bond
 core.energy_methods.CartesianBondedEnergy: Read 1434 bb-independent angles.
 basic.io.database: Database file opened: scoring/score_functions/bondlength_bondangle/default-torsions.txt
 core.energy_methods.CartesianBondedEnergy: Read 1 bb-independent torsions.
-basic.io.database: Database file opened: scoring/score_fu
+basic.io.database: Database file opened: scoring/score_functions/bondlength_bondangle/default-improper.txt
+core.energy_methods.CartesianBondedEnergy: Read 529 bb-independent improper tors.
+protocols.relax.RelaxScriptManager: Reading relax scripts list from database.
+protocols.relax.RelaxScriptManager: Looking for MonomerRelax2019.txt
+protocols.relax.RelaxScriptManager: ================== Reading script file: /Users/oskarherlitz/Desktop/rosetta.binary.m1.release-408/main/database/sampling/relax_scripts/MonomerRelax2019.txt ==================
+protocols.relax.RelaxScriptManager: repeat %%nrepeats%%
+protocols.relax.RelaxScriptManager: coord_cst_weight 1.0
+protocols.relax.RelaxScriptManager: scale:fa_rep 0.040
+protocols.relax.RelaxScriptManager: repack
+protocols.relax.RelaxScriptManager: scale:fa_rep 0.051
+protocols.relax.RelaxScriptManager: min 0.01
+protocols.relax.RelaxScriptManager: coord_cst_weight 0.5
+protocols.relax.RelaxScriptManager: scale:fa_rep 0.265
+protocols.relax.RelaxScriptManager: repack
+protocols.relax.RelaxScriptManager: scale:fa_rep 0.280
+protocols.relax.RelaxScriptManager: min 0.01
+protocols.relax.RelaxScriptManager: coord_cst_weight 0.0
+protocols.relax.RelaxScriptManager: scale:fa_rep 0.559
+protocols.relax.RelaxScriptManager: repack
+protocols.relax.RelaxScriptManager: scale:fa_rep 0.581
+protocols.relax.RelaxScriptManager: min 0.01
+protocols.relax.RelaxScriptManager: coord_cst_weight 0.0
+protocols.relax.RelaxScriptManager: scale:fa_rep 1
+protocols.relax.RelaxScriptManager: repack
+protocols.relax.RelaxScriptManager: min 0.00001
+protocols.relax.RelaxScriptManager: accept_to_best
+protocols.relax.RelaxScriptManager: endrepeat
+protocols.jd2.PDBJobInputter: Instantiate PDBJobInputter
+protocols.jd2.PDBJobInputter: PDBJobInputter::fill_jobs
+protocols.jd2.PDBJobInputter: pushed runs/colabfold_relaxed_top10/candidate_9/candidate_9_relaxed_rank_001_alphafold2_ptm_model_3_seed_000_0001.pdb nstruct index 1
+protocols.evaluation.ChiWellRmsdEvaluatorCreator: Evaluation Creator active ... 
+protocols.jd2.PDBJobInputter: PDBJobInputter::pose_from_job
+protocols.jd2.PDBJobInputter: filling pose from PDB runs/colabfold_relaxed_top10/candidate_9/candidate_9_relaxed_rank_001_alphafold2_ptm_model_3_seed_000_0001.pdb
+core.import_pose.import_pose: File 'runs/colabfold_relaxed_top10/candidate_9/candidate_9_relaxed_rank_001_alphafold2_ptm_model_3_seed_000_0001.pdb' automatically determined to be of type PDB from contents.
+core.energy_methods.CartesianBondedEnergy: Creating new peptide-bonded energy container (263)
+basic.io.database: Database file opened: scoring/score_functions/elec_cp_reps.dat
+core.scoring.elec.util: Read 40 countpair representative atoms
+core.pack.dunbrack.RotamerLibrary: shapovalov_lib_fixes_enable option is true.
+core.pack.dunbrack.RotamerLibrary: shapovalov_lib::shap_dun10_smooth_level of 1( aka lowest_smooth ) got activated.
+core.pack.dunbrack.RotamerLibrary: Binary rotamer library selected: /Users/oskarherlitz/Desktop/rosetta.binary.m1.release-408/main/database/rotamer/shapovalov/StpDwn_0-0-0/Dunbrack10.lib.bin
+core.pack.dunbrack.RotamerLibrary: Using Dunbrack library binary file '/Users/oskarherlitz/Desktop/rosetta.binary.m1.release-408/main/database/rotamer/shapovalov/StpDwn_0-0-0/Dunbrack10.lib.bin'.
+core.pack.dunbrack.RotamerLibrary: Dunbrack 2010 library took 0.067739 seconds to load from binary
+protocols.relax.FastRelax: CMD: repeat  -867.984  0  0  0.55
+protocols.relax.FastRelax: CMD: coord_cst_weight  -867.984  0  0  0.55
+protocols.relax.FastRelax: CMD: scale:fa_rep  -1052.23  0  0  0.022
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 4287 rotamers at 263 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+protocols.relax.FastRelax: CMD: repack  -1071.52  0  0  0.022
+protocols.relax.FastRelax: CMD: scale:fa_rep  -1067.57  0  0  0.02805
+protocols.relax.FastRelax: CMD: min  -1346.53  1.11557  1.11557  0.02805
+protocols.relax.FastRelax: CMD: coord_cst_weight  -1346.53  1.11557  1.11557  0.02805
+protocols.relax.FastRelax: CMD: scale:fa_rep  -745.638  1.11557  1.11557  

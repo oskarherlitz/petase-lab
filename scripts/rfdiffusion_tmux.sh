@@ -47,20 +47,23 @@ cd "${PROJECT_ROOT}"
 
 # Fix CUDA library path for DGL
 CUDA_LIB_PATHS=(
+    "/usr/local/nvidia/lib64"
+    "/usr/local/nvidia/lib"
     "/usr/local/cuda/lib64"
+    "/usr/local/cuda-11.8/targets/x86_64-linux/lib"
     "/usr/local/cuda-11.8/lib64"
     "/usr/local/cuda-11.6/lib64"
     "/usr/local/cuda-12.4/lib64"
+    "/usr/lib/x86_64-linux-gnu"
 )
 for path in "\${CUDA_LIB_PATHS[@]}"; do
-    if [ -d "\${path}" ] && [ -f "\${path}/libcudart.so"* ] 2>/dev/null; then
+    if [ -d "\${path}" ] && find "\${path}" -name "libcudart.so*" 2>/dev/null | grep -q .; then
         export LD_LIBRARY_PATH="\${path}:\${LD_LIBRARY_PATH}"
-        break
     fi
 done
 # Fallback: search for libcudart
-if [ -z "\${LD_LIBRARY_PATH##*cuda*}" ]; then
-    CUDA_LIB=\$(find /usr -name "libcudart.so*" 2>/dev/null | head -1 | xargs dirname 2>/dev/null || echo "")
+if [ -z "\${LD_LIBRARY_PATH##*cuda*}" ] && [ -z "\${LD_LIBRARY_PATH##*nvidia*}" ]; then
+    CUDA_LIB=\$(find /usr /usr/local -name "libcudart.so*" 2>/dev/null | head -1 | xargs dirname 2>/dev/null || echo "")
     if [ -n "\${CUDA_LIB}" ]; then
         export LD_LIBRARY_PATH="\${CUDA_LIB}:\${LD_LIBRARY_PATH}"
     fi
