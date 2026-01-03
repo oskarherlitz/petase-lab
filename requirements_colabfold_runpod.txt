@@ -1,0 +1,12 @@
+# ColabFold requirements for RunPod with GPU support
+# Install with: pip install -r requirements_colabfold_runpod.txt -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+
+# Core dependencies
+numpy<2.0.0,>=1.21.6
+jax[cuda12_local]==0.4.23
+jaxlib==0.4.23
+dm-haiku==0.0.11
+
+# ColabFold
+colabfold[alphafold]==1.5.4
+
