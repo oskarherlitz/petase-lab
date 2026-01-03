@@ -39,15 +39,23 @@ pip install "jax[cuda12]==0.4.23" "jaxlib==0.4.23" "dm-haiku==0.0.10"
 
 ### Issue 3: "WARNING: no GPU detected, will be using CPU"
 
-**Problem:** CUDA-enabled JAX not installed.
+**Problem:** CUDA-enabled JAX not installed or GPU not properly configured.
 
-**Fix:**
+**Quick Fix:**
+```bash
+# Use the automated diagnostic script (recommended)
+cd /workspace/petase-lab
+bash scripts/verify_gpu_runpod.sh
+```
+
+**Manual Fix:**
 ```bash
 # Uninstall CPU-only JAX
 pip uninstall -y jax jaxlib
 
 # Install CUDA-enabled JAX
-pip install "jax[cuda12]==0.4.23" "jaxlib==0.4.23"
+pip install "jax[cuda12_local]==0.4.23" "jaxlib==0.4.23" \
+    -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
 # Verify GPU is detected
 python -c "import jax; print(jax.devices())"
@@ -60,6 +68,8 @@ nvidia-smi
 
 # If nvidia-smi works, GPU is there, just need CUDA JAX
 ```
+
+**For comprehensive GPU diagnostics, see:** [RUNPOD_GPU_DIAGNOSTIC.md](RUNPOD_GPU_DIAGNOSTIC.md)
 
 ---
 
@@ -138,6 +148,15 @@ pwd  # Should show /workspace/petase-lab
 
 **If GPU not detected:**
 ```bash
-pip install "jax[cuda12]==0.4.23" "jaxlib==0.4.23"
+# Use comprehensive diagnostic (recommended)
+cd /workspace/petase-lab
+bash scripts/verify_gpu_runpod.sh
+
+# Or quick fix
+pip uninstall -y jax jaxlib
+pip install "jax[cuda12_local]==0.4.23" "jaxlib==0.4.23" \
+    -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+
+# See RUNPOD_GPU_DIAGNOSTIC.md for full diagnostic guide
 ```
 
