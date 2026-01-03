@@ -21,8 +21,19 @@ if [ -d "${CUDA_11_8_LIB}" ]; then
     echo "export LD_LIBRARY_PATH=\"${CUDA_11_8_LIB}:\${LD_LIBRARY_PATH}\"" >> ~/.bashrc
 fi
 
+# Install missing dependencies
+echo ""
+echo "Installing missing dependencies..."
+pip install torchdata 2>&1 | grep -E "(Successfully|already satisfied)" || true
+
 # Test
 echo ""
 echo "Testing DGL..."
-python3 -c "import dgl; print('✓ DGL works!')" 2>&1 | grep -v "FutureWarning" && echo "SUCCESS!" || echo "Still failing - run: bash scripts/diagnose_dgl_cuda.sh"
+if python3 -c "import dgl; print('✓ DGL works!')" 2>&1 | grep -v "FutureWarning" | grep -q "✓"; then
+    echo "SUCCESS! DGL is working."
+else
+    ERROR=$(python3 -c "import dgl" 2>&1 | grep -E "(Error|ModuleNotFoundError|OSError)" | head -1 || echo "Unknown error")
+    echo "Still failing: ${ERROR}"
+    echo "Run: bash scripts/diagnose_dgl_cuda.sh for more details"
+fi
 
