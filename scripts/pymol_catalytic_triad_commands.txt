@@ -1,0 +1,109 @@
+# PyMOL Commands to Highlight Catalytic Triad
+# Copy and paste these into PyMOL after loading structures
+
+# ============================================================================
+# First, load structures (if not already loaded)
+# ============================================================================
+cd /Users/oskarherlitz/Desktop/petase-lab
+load data/structures/5XJH/raw/PETase_raw.pdb, WT
+load runs/colabfold_predictions_gpu/candidate_6_unrelaxed_rank_001_alphafold2_ptm_model_1_seed_000.pdb, top1
+load runs/colabfold_predictions_gpu/candidate_9_unrelaxed_rank_001_alphafold2_ptm_model_3_seed_000.pdb, top2
+load runs/colabfold_predictions_gpu/candidate_60_unrelaxed_rank_001_alphafold2_ptm_model_3_seed_000.pdb, top3
+
+# Align structures
+align top1, WT
+align top2, WT
+align top3, WT
+
+# ============================================================================
+# Highlight Catalytic Triad in WT (PDB numbering: 160, 206, 237)
+# ============================================================================
+
+# Select catalytic triad residues
+select triad_WT, (WT and resi 160+206+237)
+
+# Show as sticks
+show sticks, triad_WT
+color yellow, triad_WT
+set stick_radius, 0.3, triad_WT
+
+# Highlight key catalytic atoms
+select ser160_WT, (WT and resi 160 and name OG)
+select asp206_WT, (WT and resi 206 and name OD1+OD2)
+select his237_WT, (WT and resi 237 and name NE2)
+
+# Show as spheres
+show spheres, ser160_WT+asp206_WT+his237_WT
+color yellow, ser160_WT
+color orange, asp206_WT
+color red, his237_WT
+set sphere_scale, 1.2, ser160_WT+asp206_WT+his237_WT
+
+# Label
+label triad_WT, "Ser160\nAsp206\nHis237"
+
+# ============================================================================
+# Highlight Catalytic Triad in ColabFold structures (numbered from 1: 131, 177, 208)
+# ============================================================================
+
+# Top1 (candidate_6)
+select triad_top1, (top1 and resi 131+177+208)
+show sticks, triad_top1
+color yellow, triad_top1
+set stick_radius, 0.3, triad_top1
+
+select ser131_top1, (top1 and resi 131 and name OG)
+select asp177_top1, (top1 and resi 177 and name OD1+OD2)
+select his208_top1, (top1 and resi 208 and name NE2)
+show spheres, ser131_top1+asp177_top1+his208_top1
+color yellow, ser131_top1
+color orange, asp177_top1
+color red, his208_top1
+set sphere_scale, 1.2, ser131_top1+asp177_top1+his208_top1
+label triad_top1, "Ser131\nAsp177\nHis208"
+
+# Top2 (candidate_9)
+select triad_top2, (top2 and resi 131+177+208)
+show sticks, triad_top2
+color yellow, triad_top2
+set stick_radius, 0.3, triad_top2
+
+select ser131_top2, (top2 and resi 131 and name OG)
+select asp177_top2, (top2 and resi 177 and name OD1+OD2)
+select his208_top2, (top2 and resi 208 and name NE2)
+show spheres, ser131_top2+asp177_top2+his208_top2
+color yellow, ser131_top2
+color orange, asp177_top2
+color red, his208_top2
+set sphere_scale, 1.2, ser131_top2+asp177_top2+his208_top2
+label triad_top2, "Ser131\nAsp177\nHis208"
+
+# Top3 (candidate_60)
+select triad_top3, (top3 and resi 131+177+208)
+show sticks, triad_top3
+color yellow, triad_top3
+set stick_radius, 0.3, triad_top3
+
+select ser131_top3, (top3 and resi 131 and name OG)
+select asp177_top3, (top3 and resi 177 and name OD1+OD2)
+select his208_top3, (top3 and resi 208 and name NE2)
+show spheres, ser131_top3+asp177_top3+his208_top3
+color yellow, ser131_top3
+color orange, asp177_top3
+color red, his208_top3
+set sphere_scale, 1.2, ser131_top3+asp177_top3+his208_top3
+label triad_top3, "Ser131\nAsp177\nHis208"
+
+# ============================================================================
+# Zoom to catalytic triad
+# ============================================================================
+zoom triad_WT
+
+# ============================================================================
+# Optional: Show only catalytic triad for cleaner view
+# ============================================================================
+# hide all
+# show cartoon, WT
+# show sticks, triad_WT
+# show spheres, ser160_WT+asp206_WT+his237_WT
+

@@ -1,0 +1,31 @@
+# Quick PyMOL commands - copy and paste these into PyMOL
+# Make sure you're in the repo root directory first: cd /Users/oskarherlitz/Desktop/petase-lab
+
+# Load WT enzyme
+load data/structures/5XJH/raw/PETase_raw.pdb, WT
+
+# Load top 3 candidates (correct filenames)
+load runs/colabfold_predictions_gpu/candidate_6_unrelaxed_rank_001_alphafold2_ptm_model_1_seed_000.pdb, top1
+load runs/colabfold_predictions_gpu/candidate_9_unrelaxed_rank_001_alphafold2_ptm_model_3_seed_000.pdb, top2
+load runs/colabfold_predictions_gpu/candidate_60_unrelaxed_rank_001_alphafold2_ptm_model_3_seed_000.pdb, top3
+
+# Color them
+color gray, WT
+color red, top1
+color blue, top2
+color green, top3
+
+# Show all
+show cartoon
+set cartoon_transparency, 0.3
+
+# Align to WT
+align top1, WT
+align top2, WT
+align top3, WT
+
+# View
+set ray_shadows, 0
+bg_color white
+zoom all
+

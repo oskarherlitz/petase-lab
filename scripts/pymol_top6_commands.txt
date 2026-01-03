@@ -1,0 +1,169 @@
+# PyMOL Commands to Visualize Top 6 Candidates
+# Copy and paste these into PyMOL
+
+# ============================================================================
+# Load structures
+# ============================================================================
+cd /Users/oskarherlitz/Desktop/petase-lab
+
+# Load WT enzyme
+load data/structures/5XJH/raw/PETase_raw.pdb, WT
+
+# Load top 6 candidates
+load runs/colabfold_predictions_gpu/candidate_6_unrelaxed_rank_001_alphafold2_ptm_model_1_seed_000.pdb, top1
+load runs/colabfold_predictions_gpu/candidate_9_unrelaxed_rank_001_alphafold2_ptm_model_3_seed_000.pdb, top2
+load runs/colabfold_predictions_gpu/candidate_60_unrelaxed_rank_001_alphafold2_ptm_model_3_seed_000.pdb, top3
+load runs/colabfold_predictions_gpu/candidate_21_unrelaxed_rank_001_alphafold2_ptm_model_3_seed_000.pdb, top4
+load runs/colabfold_predictions_gpu/candidate_66_unrelaxed_rank_001_alphafold2_ptm_model_3_seed_000.pdb, top5
+load runs/colabfold_predictions_gpu/candidate_25_unrelaxed_rank_001_alphafold2_ptm_model_3_seed_000.pdb, top6
+
+# ============================================================================
+# Color structures
+# ============================================================================
+color gray, WT
+color red, top1
+color blue, top2
+color green, top3
+color yellow, top4
+color orange, top5
+color purple, top6
+
+# Show all as cartoon
+show cartoon
+set cartoon_transparency, 0.3
+
+# ============================================================================
+# Align all candidates to WT
+# ============================================================================
+align top1, WT
+align top2, WT
+align top3, WT
+align top4, WT
+align top5, WT
+align top6, WT
+
+# ============================================================================
+# Highlight Catalytic Triad in WT (PDB numbering: 160, 206, 237)
+# ============================================================================
+select triad_WT, (WT and resi 160+206+237)
+show sticks, triad_WT
+color yellow, triad_WT
+set stick_radius, 0.3, triad_WT
+
+select ser160_WT, (WT and resi 160 and name OG)
+select asp206_WT, (WT and resi 206 and name OD1+OD2)
+select his237_WT, (WT and resi 237 and name NE2)
+show spheres, ser160_WT+asp206_WT+his237_WT
+color yellow, ser160_WT
+color orange, asp206_WT
+color red, his237_WT
+set sphere_scale, 1.2, ser160_WT+asp206_WT+his237_WT
+
+# ============================================================================
+# Highlight Catalytic Triad in ColabFold structures (numbered from 1: 131, 177, 208)
+# ============================================================================
+
+# Top1 (candidate_6)
+select triad_top1, (top1 and resi 131+177+208)
+show sticks, triad_top1
+color yellow, triad_top1
+set stick_radius, 0.3, triad_top1
+select ser131_top1, (top1 and resi 131 and name OG)
+select asp177_top1, (top1 and resi 177 and name OD1+OD2)
+select his208_top1, (top1 and resi 208 and name NE2)
+show spheres, ser131_top1+asp177_top1+his208_top1
+color yellow, ser131_top1
+color orange, asp177_top1
+color red, his208_top1
+set sphere_scale, 1.2, ser131_top1+asp177_top1+his208_top1
+
+# Top2 (candidate_9)
+select triad_top2, (top2 and resi 131+177+208)
+show sticks, triad_top2
+color yellow, triad_top2
+set stick_radius, 0.3, triad_top2
+select ser131_top2, (top2 and resi 131 and name OG)
+select asp177_top2, (top2 and resi 177 and name OD1+OD2)
+select his208_top2, (top2 and resi 208 and name NE2)
+show spheres, ser131_top2+asp177_top2+his208_top2
+color yellow, ser131_top2
+color orange, asp177_top2
+color red, his208_top2
+set sphere_scale, 1.2, ser131_top2+asp177_top2+his208_top2
+
+# Top3 (candidate_60)
+select triad_top3, (top3 and resi 131+177+208)
+show sticks, triad_top3
+color yellow, triad_top3
+set stick_radius, 0.3, triad_top3
+select ser131_top3, (top3 and resi 131 and name OG)
+select asp177_top3, (top3 and resi 177 and name OD1+OD2)
+select his208_top3, (top3 and resi 208 and name NE2)
+show spheres, ser131_top3+asp177_top3+his208_top3
+color yellow, ser131_top3
+color orange, asp177_top3
+color red, his208_top3
+set sphere_scale, 1.2, ser131_top3+asp177_top3+his208_top3
+
+# Top4 (candidate_21)
+select triad_top4, (top4 and resi 131+177+208)
+show sticks, triad_top4
+color yellow, triad_top4
+set stick_radius, 0.3, triad_top4
+select ser131_top4, (top4 and resi 131 and name OG)
+select asp177_top4, (top4 and resi 177 and name OD1+OD2)
+select his208_top4, (top4 and resi 208 and name NE2)
+show spheres, ser131_top4+asp177_top4+his208_top4
+color yellow, ser131_top4
+color orange, asp177_top4
+color red, his208_top4
+set sphere_scale, 1.2, ser131_top4+asp177_top4+his208_top4
+
+# Top5 (candidate_66)
+select triad_top5, (top5 and resi 131+177+208)
+show sticks, triad_top5
+color yellow, triad_top5
+set stick_radius, 0.3, triad_top5
+select ser131_top5, (top5 and resi 131 and name OG)
+select asp177_top5, (top5 and resi 177 and name OD1+OD2)
+select his208_top5, (top5 and resi 208 and name NE2)
+show spheres, ser131_top5+asp177_top5+his208_top5
+color yellow, ser131_top5
+color orange, asp177_top5
+color red, his208_top5
+set sphere_scale, 1.2, ser131_top5+asp177_top5+his208_top5
+
+# Top6 (candidate_25)
+select triad_top6, (top6 and resi 131+177+208)
+show sticks, triad_top6
+color yellow, triad_top6
+set stick_radius, 0.3, triad_top6
+select ser131_top6, (top6 and resi 131 and name OG)
+select asp177_top6, (top6 and resi 177 and name OD1+OD2)
+select his208_top6, (top6 and resi 208 and name NE2)
+show spheres, ser131_top6+asp177_top6+his208_top6
+color yellow, ser131_top6
+color orange, asp177_top6
+color red, his208_top6
+set sphere_scale, 1.2, ser131_top6+asp177_top6+his208_top6
+
+# ============================================================================
+# Set view
+# ============================================================================
+set ray_shadows, 0
+bg_color white
+zoom all
+
+# ============================================================================
+# Useful commands for viewing
+# ============================================================================
+# Zoom to catalytic triad:
+# zoom triad_WT
+
+# View individual candidates:
+# hide all; show cartoon, WT; show sticks, triad_WT; show spheres, ser160_WT+asp206_WT+his237_WT
+# hide all; show cartoon, top1; show sticks, triad_top1; show spheres, ser131_top1+asp177_top1+his208_top1
+
+# Compare two candidates:
+# hide all; show cartoon, top1; show cartoon, top4; show sticks, triad_top1+triad_top4
+

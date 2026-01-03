@@ -1,0 +1,67 @@
+# PyMOL Commands for Visualizing Top ColabFold Candidates
+# Copy and paste these into PyMOL command line, or run: pymol scripts/pymol_commands.txt
+
+# ============================================================================
+# OPTION 1: Visualize WT Enzyme and Top 3 Candidates Together
+# ============================================================================
+
+# Load WT enzyme (reference)
+load data/structures/5XJH/raw/PETase_raw.pdb, WT
+
+# Load top 3 candidates
+load runs/colabfold_predictions_gpu/candidate_6_unrelaxed_rank_001_alphafold2_ptm_model_1_seed_000.pdb, top1
+load runs/colabfold_predictions_gpu/candidate_9_unrelaxed_rank_001_alphafold2_ptm_model_3_seed_000.pdb, top2
+load runs/colabfold_predictions_gpu/candidate_60_unrelaxed_rank_001_alphafold2_ptm_model_3_seed_000.pdb, top3
+
+# Color WT in gray, candidates by pLDDT confidence
+color gray, WT
+spectrum b, blue_red, top1, minimum=50, maximum=100
+spectrum b, blue_red, top2, minimum=50, maximum=100
+spectrum b, blue_red, top3, minimum=50, maximum=100
+
+# Show all as cartoon
+show cartoon
+set cartoon_transparency, 0.4
+
+# Align all candidates to WT for comparison
+align top1, WT
+align top2, WT
+align top3, WT
+
+# Set nice view
+set ray_shadows, 0
+bg_color white
+zoom all
+
+# ============================================================================
+# OPTION 2: Visualize Single Best Candidate (candidate_6)
+# ============================================================================
+
+# Uncomment to use:
+# load runs/colabfold_predictions_gpu/candidate_6_unrelaxed_rank_001_alphafold2_ptm_model_2_seed_000.pdb, best
+# spectrum b, blue_red, best, minimum=50, maximum=100
+# show cartoon, best
+# set ray_shadows, 0
+# bg_color white
+# zoom best
+
+# ============================================================================
+# OPTION 3: Visualize Top 5 Candidates
+# ============================================================================
+
+# Uncomment to use:
+# load runs/colabfold_predictions_gpu/candidate_6_unrelaxed_rank_001_alphafold2_ptm_model_2_seed_000.pdb, c6
+# load runs/colabfold_predictions_gpu/candidate_9_unrelaxed_rank_001_alphafold2_ptm_model_2_seed_000.pdb, c9
+# load runs/colabfold_predictions_gpu/candidate_60_unrelaxed_rank_001_alphafold2_ptm_model_3_seed_000.pdb, c60
+# load runs/colabfold_predictions_gpu/candidate_21_unrelaxed_rank_001_alphafold2_ptm_model_2_seed_000.pdb, c21
+# load runs/colabfold_predictions_gpu/candidate_66_unrelaxed_rank_001_alphafold2_ptm_model_3_seed_000.pdb, c66
+# spectrum b, blue_red, all, minimum=50, maximum=100
+# show cartoon
+# align c9, c6
+# align c60, c6
+# align c21, c6
+# align c66, c6
+# set ray_shadows, 0
+# bg_color white
+# zoom all
+
