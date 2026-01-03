@@ -12,10 +12,20 @@ echo ""
 echo "1. Checking GPU hardware..."
 if command -v nvidia-smi &> /dev/null; then
     echo "✓ nvidia-smi available"
-    nvidia-smi --query-gpu=name,driver_version,memory.total,cuda_version --format=csv
-    CUDA_VERSION=$(nvidia-smi --query-gpu=cuda_version --format=csv,noheader | head -1 | tr -d ' ')
     echo ""
-    echo "System CUDA version: $CUDA_VERSION"
+    nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv
+    echo ""
+    # Show full nvidia-smi output to see CUDA version in header
+    echo "Full GPU info:"
+    nvidia-smi | head -5
+    echo ""
+    # Try to extract CUDA version from nvidia-smi (usually in header line)
+    CUDA_VERSION=$(nvidia-smi 2>/dev/null | grep -i "cuda version" | head -1 | sed 's/.*CUDA Version: \([0-9]\+\).*/\1/' || echo "12")
+    if [ -z "$CUDA_VERSION" ] || [ "$CUDA_VERSION" = "12" ]; then
+        # Default to trying CUDA 12 first (most common on RunPod)
+        CUDA_VERSION="12"
+    fi
+    echo "Will use CUDA $CUDA_VERSION for JAX installation (if needed)"
 else
     echo "✗ nvidia-smi not found - no GPU available"
     exit 1
@@ -59,29 +69,42 @@ else
     echo "=========================================="
     echo ""
     
-    # Determine which CUDA version to use
-    if [[ "$CUDA_VERSION" == "12"* ]]; then
-        CUDA_OPTION="cuda12_local"
-        echo "Installing JAX with CUDA 12..."
-    else
-        CUDA_OPTION="cuda11_local"
-        echo "Installing JAX with CUDA 11.8..."
-    fi
-    
-    echo ""
     echo "Uninstalling current JAX..."
     pip uninstall -y jax jaxlib 2>/dev/null || true
     
+    # Try CUDA 12 first (most common on RunPod)
     echo ""
-    echo "Installing JAX with $CUDA_OPTION..."
+    echo "Attempting to install JAX with CUDA 12..."
     pip install \
-        "jax[$CUDA_OPTION]==0.4.23" \
+        "jax[cuda12_local]==0.4.23" \
         "jaxlib==0.4.23" \
         -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
     
     echo ""
-    echo "Verifying fix..."
-    python3 << EOF
+    echo "Verifying GPU detection after CUDA 12 install..."
+    python3 << 'VERIFY_EOF'
+import jax
+devices = jax.devices()
+if any('gpu' in str(d).lower() or 'cuda' in str(d).lower() for d in devices):
+    print("✓ GPU detected with CUDA 12!")
+    exit(0)
+else:
+    print("⚠ CUDA 12 didn't work, trying CUDA 11.8...")
+    exit(1)
+VERIFY_EOF
+    
+    if [ $? -ne 0 ]; then
+        echo ""
+        echo "CUDA 12 didn't work, trying CUDA 11.8..."
+        pip uninstall -y jax jaxlib 2>/dev/null || true
+        pip install \
+            "jax[cuda11_local]==0.4.23" \
+            "jaxlib==0.4.23" \
+            -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+        
+        echo ""
+        echo "Verifying GPU detection after CUDA 11.8 install..."
+        python3 << 'VERIFY_EOF2'
 import jax
 print(f"JAX version: {jax.__version__}")
 print(f"JAX devices: {jax.devices()}")
@@ -89,10 +112,11 @@ print(f"Default backend: {jax.default_backend()}")
 
 devices = jax.devices()
 if any('gpu' in str(d).lower() or 'cuda' in str(d).lower() for d in devices):
-    print("✓ GPU detected!")
+    print("✓ GPU detected with CUDA 11.8!")
 else:
-    print("⚠ Still using CPU - may need to check CUDA installation")
-EOF
+    print("⚠ Still using CPU - GPU may not be properly configured")
+VERIFY_EOF2
+    fi
     
     echo ""
     echo "=========================================="
