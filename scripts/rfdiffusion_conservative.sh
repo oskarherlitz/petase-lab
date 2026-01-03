@@ -48,43 +48,60 @@ fi
 # Create output directory
 mkdir -p "${OUTPUT_DIR}"
 
-# Run RFdiffusion
+# Check if RFdiffusion is available
+RFDIFFUSION_DIR="${PROJECT_ROOT}/external/rfdiffusion"
+if [ ! -f "${RFDIFFUSION_DIR}/scripts/run_inference.py" ]; then
+    echo "Error: RFdiffusion not found at ${RFDIFFUSION_DIR}"
+    exit 1
+fi
+
+# Create output directory
+mkdir -p "${OUTPUT_DIR}"
+mkdir -p "${OUTPUT_DIR}/schedules"
+
+# Set environment
+export PYTHONPATH="${RFDIFFUSION_DIR}:${PYTHONPATH}"
+export DGLBACKEND="pytorch"
+
+# Fix CUDA library path for DGL
+CUDA_LIB_PATHS=(
+    "/usr/local/cuda/lib64"
+    "/usr/local/cuda-11.8/targets/x86_64-linux/lib"
+    "/usr/local/cuda-11.6/lib64"
+    "/usr/local/cuda-12.4/lib64"
+)
+for path in "${CUDA_LIB_PATHS[@]}"; do
+    if [ -d "${path}" ] && [ -f "${path}/libcudart.so"* ] 2>/dev/null; then
+        export LD_LIBRARY_PATH="${path}:${LD_LIBRARY_PATH}"
+        break
+    fi
+done
+# Fallback: search for libcudart
+if [ -z "${LD_LIBRARY_PATH##*cuda*}" ]; then
+    CUDA_LIB=$(find /usr -name "libcudart.so*" 2>/dev/null | head -1 | xargs dirname 2>/dev/null || echo "")
+    if [ -n "${CUDA_LIB}" ]; then
+        export LD_LIBRARY_PATH="${CUDA_LIB}:${LD_LIBRARY_PATH}"
+    fi
+fi
+
+# Run RFdiffusion directly
 echo "Starting RFdiffusion conservative mask run..."
 echo "This will generate ${NUM_DESIGNS} designs..."
 echo ""
 
-if command -v docker &> /dev/null && docker ps &> /dev/null; then
-    echo "Using Docker..."
-    # Use absolute paths inside container
-    envs/rfdiffusion/run_docker.sh \
-        inference.output_prefix=/data/outputs/designs \
-        inference.model_directory_path=/data/models \
-        inference.input_pdb=/data/inputs/$(basename ${INPUT_PDB}) \
-        inference.num_designs=${NUM_DESIGNS} \
-        'contigmap.contigs=[A1-290]' \
-        "contigmap.inpaint_seq=[${CONSERVATIVE_MASK}]" \
-        inference.ckpt_override_path=/data/models/ActiveSite_ckpt.pt \
-        inference.schedule_directory_path=/data/outputs/schedules \
-        hydra.run.dir=/data/outputs \
-        hydra.job.chdir=False
-elif command -v apptainer &> /dev/null || command -v singularity &> /dev/null; then
-    echo "Using Singularity/Apptainer..."
-    # Use absolute paths inside container
-    envs/rfdiffusion/run_singularity.sh \
-        inference.output_prefix=/data/outputs/designs \
-        inference.model_directory_path=/data/models \
-        inference.input_pdb=/data/inputs/$(basename ${INPUT_PDB}) \
-        inference.num_designs=${NUM_DESIGNS} \
-        'contigmap.contigs=[A1-290]' \
-        "contigmap.inpaint_seq=[${CONSERVATIVE_MASK}]" \
-        inference.ckpt_override_path=/data/models/ActiveSite_ckpt.pt \
-        inference.schedule_directory_path=/data/outputs/schedules \
-        hydra.run.dir=/data/outputs \
-        hydra.job.chdir=False
-else
-    echo "Error: Neither Docker nor Singularity/Apptainer found"
-    exit 1
-fi
+cd "${RFDIFFUSION_DIR}"
+
+python3 scripts/run_inference.py \
+    inference.output_prefix="${OUTPUT_DIR}/designs" \
+    inference.model_directory_path="${MODELS_DIR}" \
+    inference.input_pdb="${PROJECT_ROOT}/${INPUT_PDB}" \
+    inference.num_designs=${NUM_DESIGNS} \
+    'contigmap.contigs=[A1-290]' \
+    "contigmap.inpaint_seq=[${CONSERVATIVE_MASK}]" \
+    inference.ckpt_override_path="${MODELS_DIR}/ActiveSite_ckpt.pt" \
+    inference.schedule_directory_path="${OUTPUT_DIR}/schedules" \
+    hydra.run.dir="${OUTPUT_DIR}" \
+    hydra.job.chdir=False
 
 echo ""
 echo "=========================================="
