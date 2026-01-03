@@ -52,7 +52,24 @@ mkdir -p "${OUTPUT_DIR}"
 echo "Starting RFdiffusion test run..."
 echo ""
 
-if command -v docker &> /dev/null && docker ps &> /dev/null; then
+# Check for Docker (RunPod may need sudo or have different setup)
+USE_DOCKER=false
+USE_SINGULARITY=false
+
+if command -v docker &> /dev/null; then
+    # Try docker (may need sudo on some systems)
+    if docker ps &> /dev/null 2>&1 || sudo docker ps &> /dev/null 2>&1 || docker info &> /dev/null 2>&1; then
+        USE_DOCKER=true
+    fi
+fi
+
+if [ "$USE_DOCKER" = false ]; then
+    if command -v apptainer &> /dev/null || command -v singularity &> /dev/null; then
+        USE_SINGULARITY=true
+    fi
+fi
+
+if [ "$USE_DOCKER" = true ]; then
     echo "Using Docker..."
     # Use absolute paths inside container
     # Hydra creates its own output directory, so we need to set hydra.run.dir
@@ -68,7 +85,7 @@ if command -v docker &> /dev/null && docker ps &> /dev/null; then
         hydra.run.dir=/data/outputs \
         hydra.job.chdir=False \
         hydra.output_subdir=null
-elif command -v apptainer &> /dev/null || command -v singularity &> /dev/null; then
+elif [ "$USE_SINGULARITY" = true ]; then
     echo "Using Singularity/Apptainer..."
     # Use absolute paths inside container
     # Hydra creates its own output directory, so we need to set hydra.run.dir
@@ -83,6 +100,12 @@ elif command -v apptainer &> /dev/null || command -v singularity &> /dev/null; t
         hydra.run.dir=/data/outputs
 else
     echo "Error: Neither Docker nor Singularity/Apptainer found"
+    echo ""
+    echo "On RunPod, you may need to:"
+    echo "  1. Check if Docker is installed: which docker"
+    echo "  2. Check if you need sudo: sudo docker ps"
+    echo "  3. Or install Docker: curl -fsSL https://get.docker.com | sh"
+    echo "  4. Or run RFdiffusion directly (without container) if dependencies are installed"
     exit 1
 fi
 
