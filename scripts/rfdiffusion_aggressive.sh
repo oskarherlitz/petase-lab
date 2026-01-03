@@ -103,7 +103,7 @@ python3 scripts/run_inference.py \
     inference.model_directory_path="${MODELS_DIR}" \
     inference.input_pdb="${INPUT_PDB_ABS}" \
     inference.num_designs=${NUM_DESIGNS} \
-    'contigmap.contigs=[A1-290]' \
+    'contigmap.contigs=[A29-289]' \
     "contigmap.inpaint_seq=[${AGGRESSIVE_MASK}]" \
     inference.ckpt_override_path="${MODELS_DIR}/ActiveSite_ckpt.pt" \
     inference.schedule_directory_path="${OUTPUT_DIR}/schedules" \
