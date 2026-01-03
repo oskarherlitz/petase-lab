@@ -91,10 +91,19 @@ echo ""
 
 cd "${RFDIFFUSION_DIR}"
 
+# Resolve input PDB path (handle both absolute and relative paths)
+if [[ "${INPUT_PDB}" == /* ]]; then
+    # Already absolute path
+    INPUT_PDB_ABS="${INPUT_PDB}"
+else
+    # Relative path, make it absolute
+    INPUT_PDB_ABS="${PROJECT_ROOT}/${INPUT_PDB}"
+fi
+
 python3 scripts/run_inference.py \
     inference.output_prefix="${OUTPUT_DIR}/designs" \
     inference.model_directory_path="${MODELS_DIR}" \
-    inference.input_pdb="${PROJECT_ROOT}/${INPUT_PDB}" \
+    inference.input_pdb="${INPUT_PDB_ABS}" \
     inference.num_designs=${NUM_DESIGNS} \
     'contigmap.contigs=[A1-290]' \
     "contigmap.inpaint_seq=[${CONSERVATIVE_MASK}]" \

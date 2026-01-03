@@ -78,7 +78,7 @@ echo ""
 if [ "${1}" == "test" ] || [ -z "${1}" ]; then
     echo "Running: ${SCRIPT} data/structures/7SH6/raw/7SH6.pdb ${NUM_DESIGNS}"
     echo ""
-    bash "${SCRIPT}" "${PROJECT_ROOT}/data/structures/7SH6/raw/7SH6.pdb" "${NUM_DESIGNS}"
+    bash "${SCRIPT}" "data/structures/7SH6/raw/7SH6.pdb" "${NUM_DESIGNS}"
 else
     echo "Running: ${SCRIPT}"
     echo ""
