@@ -46,8 +46,18 @@ if [ -f "${SE3_DIR}/setup.py" ]; then
     pip install -e .
     cd "${PROJECT_ROOT}"
 else
-    echo "Error: SE3Transformer setup.py not found at ${SE3_DIR}"
-    exit 1
+    echo "⚠ Warning: SE3Transformer setup.py not found at ${SE3_DIR}"
+    echo "Checking if submodule needs initialization..."
+    if [ -d "${SE3_DIR}" ]; then
+        echo "Directory exists, trying to install anyway..."
+        cd "${SE3_DIR}"
+        pip install -e . || echo "SE3Transformer install failed, continuing..."
+        cd "${PROJECT_ROOT}"
+    else
+        echo "Error: SE3Transformer directory not found. May need to initialize submodule:"
+        echo "  git submodule update --init --recursive"
+        exit 1
+    fi
 fi
 
 # Install RFdiffusion package
