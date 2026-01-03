@@ -15,6 +15,20 @@ data/structures/*/relax/
 data/structures/*/ddg_phase*/outputs/
 results/*/gallery/*.mp4
 
+# RFdiffusion run outputs (large PDB/TRB files)
+# Ignore all RFdiffusion run directories
+runs/*rfdiffusion*/
+runs/*rfdiffusion*/*.pdb
+runs/*rfdiffusion*/*.trb
+runs/*rfdiffusion*/traj/
+runs/*rfdiffusion*/schedules/
+runs/*rfdiffusion*/run_inference.log
+runs/*rfdiffusion*/foldx_scores/
+runs/*rfdiffusion*/alphafold_validation/
+# Specific patterns for common run names
+runs/2026-01-*_rfdiffusion*/
+runs/2026-*_rfdiffusion*/
+
 # Misc editor/system
 .idea/
 .vscode/
