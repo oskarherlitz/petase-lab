@@ -1,0 +1,11 @@
+[2026-01-03 07:43:49,914][__main__][INFO] - ////////////////////////////////////////////////
+[2026-01-03 07:43:49,914][__main__][INFO] - ///// NO GPU DETECTED! Falling back to CPU /////
+[2026-01-03 07:43:49,914][__main__][INFO] - ////////////////////////////////////////////////
+[2026-01-03 07:43:49,915][rfdiffusion.inference.model_runners][INFO] - Reading checkpoint from /data/models/ActiveSite_ckpt.pt
+[2026-01-03 07:43:53,228][rfdiffusion.inference.model_runners][INFO] - Loading checkpoint.
+[2026-01-03 07:45:01,421][__main__][INFO] - ////////////////////////////////////////////////
+[2026-01-03 07:45:01,422][__main__][INFO] - ///// NO GPU DETECTED! Falling back to CPU /////
+[2026-01-03 07:45:01,422][__main__][INFO] - ////////////////////////////////////////////////
+[2026-01-03 07:45:01,423][rfdiffusion.inference.model_runners][INFO] - Reading checkpoint from /data/models/ActiveSite_ckpt.pt
+[2026-01-03 07:45:03,142][rfdiffusion.inference.model_runners][INFO] - Loading checkpoint.
+[2026-01-03 07:45:05,039][rfdiffusion.diffusion][INFO] - Calculating IGSO3.

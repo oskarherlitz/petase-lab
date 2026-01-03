@@ -16,6 +16,7 @@ RUN apt-get -q update && \
     python3.9 \
     python3-pip \
     wget \
+    libgomp1 \
     && python3.9 -m pip install -q -U --no-cache-dir pip \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get autoremove -y \
@@ -28,11 +29,13 @@ COPY external/rfdiffusion /app/RFdiffusion
 # Install Python dependencies
 # Note: PyTorch 1.12.1 with CUDA 11.6
 # Install PyTorch from CUDA 11.6 wheel index (primary index to get CUDA build)
+# Pin NumPy to <2.0 to avoid compatibility issues with compiled extensions
 RUN pip install -q --no-cache-dir \
     --index-url https://download.pytorch.org/whl/cu116 \
     torch==1.12.1 \
     torchvision==0.13.1 \
     torchaudio==0.12.1 \
+    "numpy<2.0" \
     && pip install -q --no-cache-dir \
     --index-url https://pypi.org/simple \
     dgl==1.0.2+cu116 -f https://data.dgl.ai/wheels/cu116/repo.html \

@@ -10,6 +10,7 @@ __pycache__/
 
 # Big outputs and caches (keep summaries only)
 runs/*/outputs/
+runs/colabfold_predictions_gpu/
 data/structures/*/relax/
 data/structures/*/ddg_phase*/outputs/
 results/*/gallery/*.mp4

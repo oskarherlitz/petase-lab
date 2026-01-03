@@ -26,7 +26,7 @@ PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
 # Default paths (relative to project root)
 MODELS_DIR="${RFDIFFUSION_MODELS:-${PROJECT_ROOT}/data/models/rfdiffusion}"
-INPUTS_DIR="${RFDIFFUSION_INPUTS:-${PROJECT_ROOT}/data/raw/structures}"
+INPUTS_DIR="${RFDIFFUSION_INPUTS:-${PROJECT_ROOT}/data/structures/7SH6/raw}"
 OUTPUTS_DIR="${RFDIFFUSION_OUTPUTS:-${PROJECT_ROOT}/runs/$(date +%Y-%m-%d)_rfdiffusion/outputs}"
 IMAGE_NAME="${RFDIFFUSION_IMAGE:-petase-rfdiffusion}"
 
@@ -68,8 +68,12 @@ docker run -it --rm ${GPU_FLAG} \
     -v "${INPUTS_DIR}:/data/inputs:ro" \
     -v "${OUTPUTS_DIR}:/data/outputs:rw" \
     -v "${PROJECT_ROOT}:/workspace:rw" \
-    -w /app/RFdiffusion \
+    -e PYTHONPATH=/app/RFdiffusion \
+    -e HYDRA_FULL_ERROR=1 \
+    --entrypoint="python3.9" \
+    -w /data/outputs \
     "${IMAGE_NAME}" \
+    /app/RFdiffusion/scripts/run_inference.py \
     "$@"
 
 echo ""
