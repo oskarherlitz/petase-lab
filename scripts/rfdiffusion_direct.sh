@@ -51,6 +51,28 @@ mkdir -p "${OUTPUT_DIR}/schedules"
 export PYTHONPATH="${RFDIFFUSION_DIR}:${PYTHONPATH}"
 export DGLBACKEND="pytorch"
 
+# Fix CUDA library path for DGL
+# Find CUDA libraries and add to LD_LIBRARY_PATH
+CUDA_LIB_PATHS=(
+    "/usr/local/cuda/lib64"
+    "/usr/local/cuda-11.8/lib64"
+    "/usr/local/cuda-11.6/lib64"
+    "/usr/local/cuda-12.4/lib64"
+)
+for path in "${CUDA_LIB_PATHS[@]}"; do
+    if [ -d "${path}" ] && [ -f "${path}/libcudart.so"* ] 2>/dev/null; then
+        export LD_LIBRARY_PATH="${path}:${LD_LIBRARY_PATH}"
+        break
+    fi
+done
+# Fallback: search for libcudart
+if [ -z "${LD_LIBRARY_PATH##*cuda*}" ]; then
+    CUDA_LIB=$(find /usr -name "libcudart.so*" 2>/dev/null | head -1 | xargs dirname 2>/dev/null || echo "")
+    if [ -n "${CUDA_LIB}" ]; then
+        export LD_LIBRARY_PATH="${CUDA_LIB}:${LD_LIBRARY_PATH}"
+    fi
+fi
+
 # Run RFdiffusion directly
 echo "Running RFdiffusion directly (no container)..."
 echo ""
