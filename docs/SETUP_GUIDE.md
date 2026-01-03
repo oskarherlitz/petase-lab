@@ -20,10 +20,12 @@ All the scripts in this repository are designed to run from the command line. Yo
 
 ## What Environments Do I Need?
 
-You need **two separate things**:
+You need **multiple environments** depending on which workflow you're using:
 
-1. **Python Environment** (via Conda/Mamba) - for Python scripts
-2. **Rosetta Software** (separate installation) - for protein design calculations
+1. **Base Python Environment** (Conda) - for analysis scripts
+2. **ProGen2 Environment** (Python venv) - for sequence generation (optional)
+3. **ColabFold Environment** (Conda) - for structure prediction (optional)
+4. **Rosetta Software** (separate installation) - for structure refinement (optional)
 
 ---
 
@@ -113,6 +115,30 @@ $ROSETTA_BIN/relax.linuxgccrelease -version
 
 ## Step 4: Optional - Additional Environments
 
+### For ProGen2 (Sequence Generation):
+```bash
+# Use the setup script (recommended)
+bash scripts/setup_progen2_env.sh
+
+# Or manually:
+python -m venv venv_progen2
+source venv_progen2/bin/activate
+pip install -r external/progen2/requirements.txt
+```
+
+**Note:** ProGen2 requires downloaded model files. See `docs/PROGEN2_WORKFLOW.md` for details.
+
+### For ColabFold (Structure Prediction):
+```bash
+conda env create -f envs/colabfold.yml
+conda activate petase-colabfold
+
+# Or use the setup script:
+bash scripts/setup_colabfold.sh
+```
+
+**Note:** For GPU-accelerated predictions, use RunPod cloud instances. See `docs/RUNPOD_COMPLETE_SETUP.md`.
+
 ### For PyRosetta (Python interface to Rosetta):
 ```bash
 conda env create -f envs/pyrosetta.yml
@@ -131,19 +157,47 @@ conda activate petase-foldx
 
 ## Quick Start: Run Your First Command
 
-Once everything is set up:
+### Option A: Work with Existing ColabFold Results (Recommended)
+
+If you want to work with the already-predicted structures:
 
 ```bash
-# 1. Activate environment
+# 1. Activate base environment
 conda activate petase-lab
 
-# 2. Set Rosetta path (if not in .zshrc/.bashrc)
+# 2. View top candidates
+cat runs/colabfold_predictions_gpu/CANDIDATE_RANKING.md
+
+# 3. Visualize structures
+pymol scripts/visualize_top6.pml
+
+# 4. Relax top candidates (requires Rosetta)
+export ROSETTA_BIN=/path/to/rosetta/main/source/bin
+bash scripts/relax_top_candidates.sh 1 10 runs/colabfold_relaxed_top10
+```
+
+### Option B: Run Full Pipeline from Scratch
+
+```bash
+# 1. Activate base environment
+conda activate petase-lab
+
+# 2. Set Rosetta path (if using Rosetta)
 export ROSETTA_BIN=/path/to/rosetta/main/source/bin
 
 # 3. Run setup script
 bash scripts/setup_initial_data.sh
 
-# 4. Run first Rosetta calculation
+# 4. Generate sequences (ProGen2) - optional
+source venv_progen2/bin/activate
+python scripts/run_progen2_pipeline.py --baseline data/sequences/PETase_WT.fasta ...
+
+# 5. Predict structures (ColabFold) - optional
+conda activate petase-colabfold
+bash scripts/colabfold_predict.sh ...
+
+# 6. Relax structures (Rosetta)
+conda activate petase-lab
 bash scripts/rosetta_relax.sh data/structures/5XJH/raw/PETase_raw.pdb
 ```
 
@@ -173,12 +227,16 @@ bash scripts/rosetta_relax.sh data/structures/5XJH/raw/PETase_raw.pdb
 
 ## Environment Summary
 
-| Tool | Installation Method | Environment |
-|------|---------------------|------------|
-| Python scripts | Conda (`envs/base.yml`) | `petase-lab` |
-| Rosetta | Separate download + license | System PATH |
-| FoldX | Separate download | System PATH or `petase-foldx` |
-| PyRosetta | Conda + manual wheel | `petase-pyrosetta` |
+| Tool | Installation Method | Environment | Required? |
+|------|---------------------|------------|-----------|
+| Base Python scripts | Conda (`envs/base.yml`) | `petase-lab` | ✅ Yes |
+| ProGen2 | Python venv (`scripts/setup_progen2_env.sh`) | `venv_progen2` | Optional |
+| ColabFold | Conda (`envs/colabfold.yml`) | `petase-colabfold` | Optional |
+| Rosetta | Separate download + license | System PATH | Optional |
+| FoldX | Separate download | System PATH or `petase-foldx` | Optional |
+| PyRosetta | Conda + manual wheel | `petase-pyrosetta` | Optional |
+
+**Note:** You only need the environments for the workflows you plan to use. The base environment is required for most analysis scripts.
 
 ---
 
